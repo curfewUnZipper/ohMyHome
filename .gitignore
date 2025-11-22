@@ -3,4 +3,4 @@ logs/
 ohmyml/
 ohmygod/
 .env
-.py
+run_schedule.py
