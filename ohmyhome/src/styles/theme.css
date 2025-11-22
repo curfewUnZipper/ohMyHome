@@ -39,6 +39,14 @@
     background-color: var(--brand-primary);
   }
 
+  .bg-brand-text {
+    background-color: var(--brand-text);
+  }
+
+  .border-brand-primary {
+    border-color: var(--brand-primary);
+  }
+
   .hover\:text-brand-primary:hover {
     color: var(--brand-primary);
   }

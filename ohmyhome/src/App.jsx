@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import HouseSelection from "./pages/HouseSelection";
 import HomePage from "./pages/HomePage";
 import LivingRoom from "./pages/LivingRoom";
 import Lights from "./pages/Lights";
@@ -46,6 +47,7 @@ function getCurrentOnStatus(schedules) {
 }
 
 export default function App() {
+  const [selectedHouse, setSelectedHouse] = useState(null);
   const [schedules, setSchedules] = useState(getInitialSchedules);
   const [manualOverride, setManualOverride] = useState(null);
 
@@ -63,39 +65,76 @@ export default function App() {
 
   const effectiveLightStatus = manualOverride !== null ? manualOverride : lightStatus;
 
+  const handleSelectHouse = (houseId) => {
+    setSelectedHouse(houseId);
+  };
+
+  const handleBackToSelection = () => {
+    setSelectedHouse(null);
+  };
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar onBack={handleBackToSelection} />
       <Routes>
         <Route
           path="/"
-          element={<HomePage />}
+          element={
+            selectedHouse ? (
+              <HomePage />
+            ) : (
+              <HouseSelection onSelectHouse={handleSelectHouse} />
+            )
+          }
         />
         <Route
           path="/livingroom"
           element={
-            <LivingRoom
-              lightStatus={effectiveLightStatus}
-              setManualOverride={setManualOverride}
-            />
+            selectedHouse ? (
+              <LivingRoom
+                lightStatus={effectiveLightStatus}
+                setManualOverride={setManualOverride}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )
           }
         />
         <Route
           path="/lights"
           element={
-            <Lights
-              schedules={schedules}
-              setSchedules={setSchedules}
-              lightStatus={effectiveLightStatus}
-              setManualOverride={setManualOverride}
-            />
+            selectedHouse ? (
+              <Lights
+                schedules={schedules}
+                setSchedules={setSchedules}
+                lightStatus={effectiveLightStatus}
+                setManualOverride={setManualOverride}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )
           }
         />
-        <Route path="/ac" element={<AC />} />
-        <Route path="/tv" element={<TV />} />
-        <Route path="/fan" element={<Fan />} />
-        <Route path="/speakers" element={<Speakers />} />
-        <Route path="/eco" element={<Eco />} />
+        <Route 
+          path="/ac" 
+          element={selectedHouse ? <AC /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/tv" 
+          element={selectedHouse ? <TV /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/fan" 
+          element={selectedHouse ? <Fan /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/speakers" 
+          element={selectedHouse ? <Speakers /> : <Navigate to="/" replace />} 
+        />
+        <Route 
+          path="/eco" 
+          element={selectedHouse ? <Eco /> : <Navigate to="/" replace />} 
+        />
       </Routes>
     </BrowserRouter>
   );
