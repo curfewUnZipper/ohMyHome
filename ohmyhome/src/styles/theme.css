@@ -1,0 +1,67 @@
+/* --------------------------
+   🔹 BASE THEME VARIABLES
+--------------------------- */
+@layer base {
+  :root {
+    --brand-primary: #6D28D9;
+    --brand-secondary: #F59E0B;
+    --brand-bg: #111827;
+    --brand-text: #ffffff;
+    --brand-hover: #2d3748;
+  }
+
+  [data-theme="light"] {
+    --brand-primary: #2563EB;
+    --brand-secondary: #D97706;
+    --brand-bg: #ffffff;
+    --brand-text: #111827;
+    --brand-hover: #e5e7eb;
+  }
+}
+
+/* --------------------------
+   🔹 THEME UTILITY CLASSES
+--------------------------- */
+@layer utilities {
+  .bg-brand-bg {
+    background-color: var(--brand-bg);
+  }
+
+  .text-brand-text {
+    color: var(--brand-text);
+  }
+
+  .text-brand-primary {
+    color: var(--brand-primary);
+  }
+
+  .bg-brand-primary {
+    background-color: var(--brand-primary);
+  }
+
+  .hover\:text-brand-primary:hover {
+    color: var(--brand-primary);
+  }
+
+  .hover\:bg-brand-hover:hover {
+    background-color: var(--brand-hover);
+  }
+}
+
+/* --------------------------
+   🔹 TABLE OVERRIDES
+--------------------------- */
+@layer base {
+  table, th, td, tr {
+    color: var(--brand-text) !important;
+    border-color: var(--brand-hover) !important;
+  }
+
+  table thead {
+    background-color: var(--brand-hover) !important;
+  }
+
+  table tbody tr:hover {
+    background-color: var(--brand-hover) !important;
+  }
+}

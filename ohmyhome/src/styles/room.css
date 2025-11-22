@@ -1,0 +1,23 @@
+.room-card {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.livingroom {
+  background: linear-gradient(135deg, #EDE9FE 0%, #6D28D9 100%);
+  /* (No color property here) */
+}
+.kitchen {
+  background: linear-gradient(135deg, #FFF7ED 0%, #F59E0B 100%);
+}
+.bedroom1 {
+  background: linear-gradient(135deg, #E0F2FE 0%, #2563EB 100%);
+}
+.bedroom2 {
+  background: linear-gradient(135deg, #ECFEFF 0%, #14B8A6 100%);
+}
+.bathroom {
+  background: linear-gradient(135deg, #F1F5F9 0%, #64748B 100%);
+}
+
